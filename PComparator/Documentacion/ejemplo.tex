@@ -1,0 +1,110 @@
+\documentclass{pre-tfg}
+
+\usepackage{listings}
+\usepackage{formular}
+\usepackage[pdftex]{graphicx}
+
+\showhelp  % comenta o borra para eliminar ayudas
+
+\title{COMPARADOR DE CONFIGURACIONES DE ORDENADOR POR COMPONENTES}
+\author{Álvaro Ángel-Moreno Pinilla y Carlos Córdoba Ruiz}
+\advisorFirst{Luis Rodriguez Benitez}
+\advisorDepartment{DEPARTAMENTO DE TECNOLOGÍAS Y SISTEMAS DE INFORMACIÓN}
+\advisorSecond{}
+\intensification{COMPUTACIÓN}
+\docdate{}{30 Octubre 2017}
+
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+\usepackage{color}
+\definecolor{gray97}{gray}{.97}
+\definecolor{gray75}{gray}{.75}
+\definecolor{gray45}{gray}{.45}
+
+\lstset{ frame=Ltb,
+     framerule=0pt,
+     aboveskip=0.5cm,
+     framextopmargin=3pt,
+     framexbottommargin=3pt,
+     framexleftmargin=0.4cm,
+     framesep=0pt,
+     rulesep=.4pt,
+     backgroundcolor=\color{gray97},
+     rulesepcolor=\color{black},
+     %
+     stringstyle=\ttfamily,
+     showstringspaces = false,
+     basicstyle=\small\ttfamily,
+     commentstyle=\color{gray45},
+     keywordstyle=\bfseries,
+     %
+     numbers=left,
+     numbersep=15pt,
+     numberstyle=\tiny,
+     numberfirstline = false,
+     breaklines=true,
+   }
+
+% minimizar fragmentado de listados
+\lstnewenvironment{listing}[1][]
+   {\lstset{#1}\pagebreak[0]}{\pagebreak[0]}
+
+\lstdefinestyle{consola}
+   {basicstyle=\scriptsize\bf\ttfamily,
+    backgroundcolor=\color{gray75},
+   }
+
+\lstdefinestyle{C}
+   {language=C,
+   }
+
+
+\renewcommand*\lstlistingname{Listado}
+
+
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\newpage
+
+\section{INTRODUCCIÓN}
+
+En este trabajo se utilizarán los conceptos estudiados en clase sobre los Sistemas Multiagentes y JADE y se desarrollará una aplicación aplicando estos conocimientos. La aplicación que se desarrollará será un sistema que busque en varias páginas un mismo componente de ordenador y comparará sus precios y nos dirá en que página está más barato este componente.
+
+
+
+\section{OBJETIVOS GENERALES}
+Principalmente nos vamos a basar en estos dos objetivos:
+\begin{itemize}
+	\item Tomando como información el precio de las búsquedas en diferentes páginas web de venta de ordenadores, introduciendo los mismos componentes, concluir con la ayuda a la decisión sobre qué sitio web elegir para dicha compra.
+	\item En caso de que no pudieran buscarse exactamente los mismos componentes a la hora de la búsqueda, definir otros de precio equiparable para una comparación más fiable.
+\end{itemize}
+El lenguaje de programación elegido será Java, que es el lenguaje en el que está desarrollado la plataforma software para el desarrollo de agentes, que soporta la coordinación de agentes FIPA usando el lenguaje de comunicación FIPA-ACL.
+
+
+
+
+\section{INDICE ORIENTATIVO}
+ Proponemos la estructura del trabajo en los siguientes apartados:
+ \begin{enumerate}
+ 	\item Definición del problema.	
+ 	\item Estudio del arte.
+ 	\item Sitios web a consultar.
+ 	\item Algoritmo de funcionalidad: comparación de componentes.
+ 	\item Caso de prueba.
+ \end{enumerate}
+
+
+
+\end{document}
+
+
+% Local Variables:
+% coding: utf-8
+% mode: flyspell
+% ispell-local-dictionary: "castellano8"
+% mode: latex
+% End:
