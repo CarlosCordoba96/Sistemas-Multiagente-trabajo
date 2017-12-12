@@ -4,10 +4,18 @@ public class Item {
 	private String nombre;
 	private double precio;
 	private String pagina;
-	public Item(String nombre,double precio,String pagina) {
+	private Boolean disponible;
+	public Item(String nombre,double precio,boolean disponible,String pagina) {
 		this.pagina=pagina;
 		this.nombre=nombre;
 		this.precio=precio;
+		this.disponible=disponible;
+	}
+	public Boolean getDisponible() {
+		return disponible;
+	}
+	public void setDisponible(Boolean disponible) {
+		this.disponible = disponible;
 	}
 	public String getPagina() {
 		return pagina;
