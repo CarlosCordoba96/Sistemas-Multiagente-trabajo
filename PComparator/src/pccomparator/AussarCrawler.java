@@ -61,6 +61,7 @@ public class AussarCrawler {
 		String value=null;
 		while (matcher.find()) {
 		    value=matcher.group(0);
+		    break;
 		}
 		return value.substring(7,value.length()-1);
 	}

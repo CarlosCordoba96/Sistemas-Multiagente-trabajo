@@ -10,8 +10,10 @@ import jade.lang.acl.UnreadableException;
 
 public class AgenteFinal extends Agent {
 
-	private LinkedList <Item> list=new LinkedList<Item>();
-	public void Setup() {
+
+	public void setup() {
+		System.out.println("Nuevo comportamiento bb");
+		addBehaviour(new fbehaviour());
 		
 	}
 	public void TakeDown() {
@@ -19,8 +21,10 @@ public class AgenteFinal extends Agent {
 	}
 	
 	public class anunciador extends OneShotBehaviour{
-
-		@Override
+		private LinkedList <Item> list;
+		public anunciador(LinkedList <Item> list) {
+			this.list=list;
+		}
 		public void action() {
 			Item selected=null;
 			double min=Double.MAX_VALUE;
@@ -36,8 +40,8 @@ public class AgenteFinal extends Agent {
 		
 	}
 	public class fbehaviour extends Behaviour{
-
-		MessageTemplate plantilla = null;
+		private LinkedList <Item> list=new LinkedList<Item>();
+		MessageTemplate plantilla;;
 		int espera;
 		int recibidos;
 		boolean end=false;
@@ -48,6 +52,8 @@ public class AgenteFinal extends Agent {
 		}
 		 
 		 public void onStart() {
+			 System.out.println("Empezamos");
+			 plantilla=null;
 			 AID emisor = new AID();
 	         emisor.setLocalName("crawler");
 	         MessageTemplate filtroEmisor = MessageTemplate.MatchSender(emisor);
@@ -56,9 +62,10 @@ public class AgenteFinal extends Agent {
 		 }
 		public void action() {
 			
-			 ACLMessage mensaje=receive(plantilla);
-			 if(mensaje!=null) {
-				 recibidos++;
+			
+			if(recibidos==0) {
+				ACLMessage mensaje=blockingReceive(plantilla);
+				recibidos++;
 				 espera=3;
 				 Item recieved=null;
 				 try {
@@ -69,16 +76,37 @@ public class AgenteFinal extends Agent {
 					e.printStackTrace();
 				}
 				
-				 
-				 
-			 }else {
-				 if(espera==0) {
-					end=true;
+				
+				
+			}else {
+				 ACLMessage mensaje=receive(plantilla);
+				 if(mensaje!=null) {
+					 recibidos++;
+					 espera=3;
+					 Item recieved=null;
+					 try {
+					recieved=(Item)mensaje.getContentObject();
+					list.add(recieved);
+					} catch (UnreadableException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					 
+					 
+				 }else {
+					  if(espera==0) {
+						 end=true;
+					 }else {
+						 System.out.println("Esperamos a ver si llega alguno más...");
+						 espera--;
+						 block(5000);
+					 }
+					 
 				 }
-				 System.out.println("Esperamos a ver si llega alguno más...");
-				 espera--;
-				 block(5000);
-			 }
+			}
+			
+			
 			 
 			
 		}
@@ -89,7 +117,7 @@ public class AgenteFinal extends Agent {
 			return (recibidos==3)||end;
 		}
 		public int onEnd() {
-			
+			addBehaviour(new anunciador(list));
 			return 0;
 		}
 		
