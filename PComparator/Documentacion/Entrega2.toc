@@ -1,0 +1,6 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {1}DEFINICI\IeC {\'O}N DEL PROBLEMA}{2}{section.1}
+\contentsline {section}{\numberline {2}ANTECEDENTES}{2}{section.2}
+\contentsline {section}{\numberline {3}SITIOS WEB A CONSULTAR}{2}{section.3}
+\contentsline {section}{\numberline {4}AGENTES Y COMPORTAMIENTOS}{3}{section.4}
+\contentsline {section}{\numberline {5}FLUJO DE MENSAJES}{4}{section.5}
