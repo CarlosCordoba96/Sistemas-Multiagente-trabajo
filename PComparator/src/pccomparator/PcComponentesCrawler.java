@@ -35,31 +35,23 @@ public class PcComponentesCrawler  {
              return;
          }
          
-         e = doc.getElementsByClass("tarjeta-articulo__elementos-basicos");
-        // System.out.println(e);
-         int i=0;
+         e = doc.getElementsByClass("tarjeta-articulo__elementos-basicos");//Cada producto en PcComponentes
          String nombre;
          double precio;
          boolean disponibilidad;
          for(Element ele: e ){
-        	 
-        	 //System.out.println(ele);
-        	 i++;
         	 nombre=sacarnombre(ele);
         	 precio=sacarprecio(ele);
         	 disponibilidad=sacardisponibilidad(ele);
-        	 //System.out.println("Nombre: "+ nombre+" precio: "+precio+" disponibilidad: "+disponibilidad);
         	 Item ite=new Item(nombre,precio,disponibilidad,WEB);
         	 this.items.add(ite);        	 
          }
 	}
 	static String sacarnombre(Element e){
-		//System.out.println(e);
 		String articulo=e.childNode(1).toString();
 		final String patron = "data-name=\"[^\"]*\"";
 		Pattern p1 = Pattern.compile(patron);
 		final Matcher matcher = p1.matcher(articulo);
-		int n = 0; //sÃ³lo para mostrar el nÃºmero de elemento (opcional)
 		String value=null;
 		while (matcher.find()) {
 		    value=matcher.group(0);
@@ -68,30 +60,23 @@ public class PcComponentesCrawler  {
 	}
 	
 	static double sacarprecio(Element e){
-		//System.out.println(e);
 		String articulo=e.childNode(1).toString();
-
 		final String patron = "data-price=\"[0-9]+([.][0-9]+)?\"";
 		Pattern p1 = Pattern.compile(patron);
 		final Matcher matcher = p1.matcher(articulo);
-		int n = 0; //sÃ³lo para mostrar el nÃºmero de elemento (opcional)
 		String value=null;
 		while (matcher.find()) {
 
 		   value=matcher.group(0);
 		}
-		
 		return Double.parseDouble(value.substring(12,value.length()-1));			
 	}
 	static boolean sacardisponibilidad(Element e) {
-		//System.out.println(e);
 		boolean disponibilidad=false;
 		String articulo=e.childNode(3).toString();
-		//System.out.println(articulo);
 		final String patron = "mañana";
 		Pattern p1 = Pattern.compile(patron);
 		final Matcher matcher = p1.matcher(articulo);
-		int n = 0; //sólo para mostrar el número de elemento (opcional)
 		String value=null;
 		while (matcher.find()) {
 
@@ -110,13 +95,5 @@ public class PcComponentesCrawler  {
 			}
 		}
 		return i;
-	}
-	public ArrayList results(){
-		return items;
-	}
-
-	
-	
-	
-	
+	}	
 }

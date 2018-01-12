@@ -31,49 +31,37 @@ public class NHomePCCrawler{
             System.out.println("The web NewHomePc cannot be reached");
             return;
         }
-        //System.out.println(FinalPath);
-        e = doc.getElementsByClass("col-lg-4 col-md-4 col-sm-6");
-       // System.out.println(e);
- 
-        int i=0;
+        e = doc.getElementsByClass("col-lg-4 col-md-4 col-sm-6");//D�nde se encuentra cada producto
+
+     
         String nombre;
         double precio;
         boolean disponible;
         for(Element ele: e ){
-       	 
-       	 //System.out.println(ele);
-       	 i++;
        	 nombre=sacarnombre(ele);
-       	 //System.out.println(nombre);
        	 precio=sacarprecio(ele);
-       	 //System.out.println(precio);
        	 disponible=disponibilidad(ele);
-       	// System.out.println(disponible);
        	 Item ite=new Item(nombre,precio,disponible,WEB);
        	 this.items.add(ite);        	 
         }
 	}
 	private static String sacarnombre(Element e){
-		//System.out.println(e);
 		String articulo=e.childNode(0).toString();
 		final String patron = "title=\"[^\"]*\"";
 		Pattern p1 = Pattern.compile(patron);
 		final Matcher matcher = p1.matcher(articulo);
-		int n = 0; //sólo para mostrar el número de elemento (opcional)
 		String value=null;
 		while (matcher.find()) {
 		    value=matcher.group(0);
 		}
 		return value.substring(7,value.length()-1);
 	}
+	
 	private static double sacarprecio(Element e){
-		//System.out.println(e);
 		String articulo=e.childNode(0).toString();
-
 		final String patron = "[0-9]+([.][0-9]+)?";
 		Pattern p1 = Pattern.compile(patron);
 		final Matcher matcher = p1.matcher(articulo);
-		int n = 0; //sólo para mostrar el número de elemento (opcional)
 		String value=null;
 		while (matcher.find()) {
 
@@ -85,12 +73,9 @@ public class NHomePCCrawler{
 	private static boolean disponibilidad(Element e) {
 		boolean disponible=false;
 		String articulo=e.childNode(0).toString();
-
 		final String patron = "Agotado";
 		Pattern p1 = Pattern.compile(patron);
 		final Matcher matcher = p1.matcher(articulo);
-		int n = 0; //sólo para mostrar el número de elemento (opcional)
-		String value=null;
 		while (matcher.find()) {
 		   disponible=true;
 		   break;
@@ -108,8 +93,5 @@ public class NHomePCCrawler{
 			}
 		}
 		return i;
-	}
-	public ArrayList results(){
-		return items;
 	}
 }

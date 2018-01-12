@@ -33,19 +33,15 @@ public class AussarCrawler {
          }
 
          e = doc.getElementsByClass("right-block");
-        // System.out.println(e);
-         int i=0;
+
          String nombre;
          double precio;
 				 boolean disponibilidad;
          for(Element ele: e ){
-
-        	 //System.out.println(ele);
-        	 i++;
         	 nombre=sacarnombre(ele);
         	 precio=sacarprecio(ele);
 			 disponibilidad=sacardisponibilidad(ele);
-			// System.out.println("Nombre: "+ nombre+" precio: "+precio+" disponibilidad: "+disponibilidad);
+
         	 Item ite=new Item(nombre,precio,disponibilidad,WEB);
         	 this.items.add(ite);
         	 
@@ -57,7 +53,6 @@ public class AussarCrawler {
 		final String patron = "title=\"[^\"]*\"";
 		Pattern p1 = Pattern.compile(patron);
 		final Matcher matcher = p1.matcher(articulo);
-		int n = 0; //sólo para mostrar el número de elemento (opcional)
 		String value=null;
 		while (matcher.find()) {
 		    value=matcher.group(0);
@@ -67,30 +62,27 @@ public class AussarCrawler {
 	}
 
 	static double sacarprecio(Element e){
-		//System.out.println(e);
 		String articulo=e.toString();
 
 		final String patron = "[0-9]+([,][0-9]+)? ";
 		Pattern p1 = Pattern.compile(patron);
 		final Matcher matcher = p1.matcher(articulo);
-		int n = 0; //sólo para mostrar el número de elemento (opcional)
 		String value=null;
 		while (matcher.find()) {
 
 		   value=matcher.group(0);
 		}
 
-		return Double.parseDouble(value.replace(',','.'));
+		return Double.parseDouble(value.replace(',','.'));//problema de conversión del nº
 	}
 
 	static boolean sacardisponibilidad(Element e) {
-		//System.out.println(e);
 		String articulo=e.toString();
 		boolean disponibilidad = true;
 		final String patron = "Agotado";
 		Pattern p1 = Pattern.compile(patron);
 		final Matcher matcher = p1.matcher(articulo);
-		int n = 0; //sólo para mostrar el número de elemento (opcional)
+
 		String value=null;
 		while (matcher.find()) {
 		   value=matcher.group(0);
@@ -109,7 +101,5 @@ public class AussarCrawler {
 		}
 		return i;
 	}
-	public ArrayList results(){
-		return items;
-	}
+
 }

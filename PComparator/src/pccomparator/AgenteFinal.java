@@ -70,7 +70,10 @@ public class AgenteFinal extends Agent {
 				 Item recieved=null;
 				 try {
 				recieved=(Item)mensaje.getContentObject();
-				list.add(recieved);
+				if(recieved!=null) {
+					list.add(recieved);
+				}
+				
 				} catch (UnreadableException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

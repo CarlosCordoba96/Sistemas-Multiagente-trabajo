@@ -10,7 +10,7 @@ import jade.core.behaviours.*;
 import jade.lang.acl.ACLMessage;
 
 
-public class Agente extends Agent {
+public class Crawler extends Agent {
 	AID id = new AID();
     
 	private Item [] items=new Item [3];
@@ -18,7 +18,7 @@ public class Agente extends Agent {
 	Busqueda1 b1;
 	Busqueda2 b2;
 	Busqueda3 b3;
-	//Vector donde se guardara cada item de agente
+
 	protected void setup() {
 		id.setLocalName("agente");
 		Object[] args = getArguments();
@@ -50,13 +50,8 @@ public class Agente extends Agent {
 	protected void takeDown()
     {
     
-	System.out.println("Taking down agente crawler");
-	/*Thread td1 = tbf.getThread(Comp1);
-	td1.interrupt();
-	Thread td2 = tbf.getThread(Comp2);
-	td2.interrupt();*/
-	super.takeDown();
-
+		System.out.println("Taking down Crawler ...");
+		super.takeDown();
         System.out.println("****Agente finalizado****");
     }
 	private class Busqueda1 extends OneShotBehaviour{
@@ -71,7 +66,7 @@ public class Agente extends Agent {
 			crawler=new PcComponentesCrawler(nombreitem);
 		}
 		public void action() {
-			arr=crawler.result();//debemos tratar el asunto de varios productos encontrados
+			arr=crawler.result();
 			System.out.println(arr);
 			
 		}
@@ -81,15 +76,14 @@ public class Agente extends Agent {
 				 mensaje.setSender(getAID());
 				 mensaje.addReceiver(id);
 				 try {
-					mensaje.setContentObject((Serializable) arr);
+					mensaje.setContentObject(arr);
 					send(mensaje);
-					System.out.println("Enviado");
 				} catch (IOException e) {
-					System.out.println("Pues no sa enviao");
+					System.out.println("Error a la hora de enviar el mensaje");
 					e.printStackTrace();
 				}
 			}else {
-				System.out.println("No se ha encontrado nada en PcComponentes");
+				System.out.println("No se ha encontrado el producto en PcComponentes");
 			}
 			return 0;
 		}
@@ -108,7 +102,7 @@ private class Busqueda2 extends OneShotBehaviour{
 	}
 	
 		public void action() {
-			arr=crawler.result();//debemos tratar el asunto de varios productos encontrados
+			arr=crawler.result();
 			System.out.println(arr);
 		}
 		public int onEnd() {
@@ -118,15 +112,14 @@ private class Busqueda2 extends OneShotBehaviour{
 				 mensaje.setSender(getAID());
 				 mensaje.addReceiver(id);
 				 try {
-					mensaje.setContentObject((Serializable) arr);
+					mensaje.setContentObject( arr);
 					send(mensaje);
-					System.out.println("Enviado");
 				} catch (IOException e) {
-					System.out.println("Pues no sa enviao");
+					System.out.println("Error a la hora de enviar el mensaje");
 					e.printStackTrace();
 				}
 			}else {
-				System.out.println("No se ha encontrado nada en NewHomePC");
+				System.out.println("No se ha encontrado el producto en NewHomePC");
 			}
 			
 			return 0;
@@ -154,18 +147,16 @@ private class Busqueda3 extends OneShotBehaviour{
 		
 		if(arr!=null) {
 			ACLMessage mensaje = new ACLMessage(ACLMessage.INFORM);
-			 mensaje.setSender(getAID());
 			 mensaje.addReceiver(id);
 			 try {
-				mensaje.setContentObject((Serializable) arr);
+				mensaje.setContentObject(arr);
 				send(mensaje);
-				System.out.println("Enviado");
 			} catch (IOException e) {
-				System.out.println("Pues no sa enviao");
+				System.out.println("Error a la hora de enviar el mensaje");
 				e.printStackTrace();
 			}
 		}else {
-			System.out.println("No se ha encontrado nada en AussarPc");
+			System.out.println("No se ha encontrado el producto en AussarPc");
 		}
 		return 0;
 	}
