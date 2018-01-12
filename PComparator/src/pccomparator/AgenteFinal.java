@@ -12,7 +12,6 @@ public class AgenteFinal extends Agent {
 
 
 	public void setup() {
-		System.out.println("Nuevo comportamiento bb");
 		addBehaviour(new fbehaviour());
 		
 	}
@@ -28,13 +27,18 @@ public class AgenteFinal extends Agent {
 		public void action() {
 			Item selected=null;
 			double min=Double.MAX_VALUE;
-			for (Item i: list) {
-				if(min > i.getPrecio()) {
-					min=i.getPrecio();
-					selected=i;
+			if(list.size()>0) {
+				for (Item i: list) {
+					if(min > i.getPrecio()&& i.getDisponible()==true) {
+						min=i.getPrecio();
+						selected=i;
+					}
 				}
+				System.out.println("Te recomendamos: "+selected);
+			}else {
+				System.out.println("No hemos encontrado ningún producto con esas especificaciones");
 			}
-			System.out.println("EL ITEM MÁS BARATO ES: "+selected);
+			
 		}
 	
 		
@@ -52,7 +56,6 @@ public class AgenteFinal extends Agent {
 		}
 		 
 		 public void onStart() {
-			 System.out.println("Empezamos");
 			 plantilla=null;
 			 AID emisor = new AID();
 	         emisor.setLocalName("crawler");
@@ -101,7 +104,6 @@ public class AgenteFinal extends Agent {
 					  if(espera==0) {
 						 end=true;
 					 }else {
-						 System.out.println("Esperamos a ver si llega alguno más...");
 						 espera--;
 						 block(5000);
 					 }

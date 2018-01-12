@@ -24,8 +24,7 @@ public class Item implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Item [nombre=" + nombre + ", precio=" + precio + ", pagina=" + pagina + ", disponible=" + disponible
-				+ "]";
+		return "El producto: " + nombre + "\n con un precio:" + precio + "\n en la pagina: " + pagina ;
 	}
 	public void setPagina(String pagina) {
 		this.pagina = pagina;
