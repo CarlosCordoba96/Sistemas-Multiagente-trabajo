@@ -20,6 +20,11 @@ public class Item {
 	public String getPagina() {
 		return pagina;
 	}
+	@Override
+	public String toString() {
+		return "Item [nombre=" + nombre + ", precio=" + precio + ", pagina=" + pagina + ", disponible=" + disponible
+				+ "]";
+	}
 	public void setPagina(String pagina) {
 		this.pagina = pagina;
 	}

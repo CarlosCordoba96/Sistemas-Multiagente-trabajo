@@ -3,7 +3,8 @@ package pccomparator;
 public class TestCrawler {
 
 	public static void main(String[] args) {
-		PcComponentesCrawler pc=new PcComponentesCrawler("Steelseries");
+		NHomePCCrawler pc=new NHomePCCrawler("Steelseries");
+		System.out.println(pc.results());
 		
 	}
 

@@ -9,7 +9,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class NHomePCCrawler {
+public class NHomePCCrawler{
 	private Elements e;
 	private Elements aux;
 	private ArrayList<Item> items=new ArrayList<Item>();
@@ -17,7 +17,7 @@ public class NHomePCCrawler {
 	private static final String FINALPATH="&brand%5B%5D=&price=";
 	private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36";
 	private String FinalPath;
-	private static final String WEB="PcBox";
+	private static final String WEB="NewHomePc";
 	
 	public NHomePCCrawler(String item) {
 		FinalPath=PATH+item+FINALPATH;
@@ -31,7 +31,7 @@ public class NHomePCCrawler {
             System.out.println("The web NewHomePc cannot be reached");
             return;
         }
-        System.out.println(FinalPath);
+        //System.out.println(FinalPath);
         e = doc.getElementsByClass("col-lg-4 col-md-4 col-sm-6");
        // System.out.println(e);
  
@@ -41,14 +41,14 @@ public class NHomePCCrawler {
         boolean disponible;
         for(Element ele: e ){
        	 
-       	 System.out.println(ele);
+       	 //System.out.println(ele);
        	 i++;
        	 nombre=sacarnombre(ele);
-       	 System.out.println(nombre);
+       	 //System.out.println(nombre);
        	 precio=sacarprecio(ele);
-       	 System.out.println(precio);
+       	 //System.out.println(precio);
        	 disponible=disponibilidad(ele);
-       	 System.out.println(disponible);
+       	// System.out.println(disponible);
        	 Item ite=new Item(nombre,precio,disponible,WEB);
        	 this.items.add(ite);        	 
         }
@@ -97,6 +97,17 @@ public class NHomePCCrawler {
 		}
 	
 		return disponible;
+	}
+	public Item result() {
+		Item i=null;
+		double price=Double.MAX_VALUE;
+		for (Item e:items) {
+			if(price>e.getPrecio()) {
+				i=e;
+				price=i.getPrecio();
+			}
+		}
+		return i;
 	}
 	public ArrayList results(){
 		return items;
