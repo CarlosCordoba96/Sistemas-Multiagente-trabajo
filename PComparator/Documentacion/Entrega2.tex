@@ -4,6 +4,8 @@
 \usepackage{formular}
 \usepackage{listings}
 \usepackage[pdftex]{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
 
 %\showhelp  % comenta o borra para eliminar ayudas
 
@@ -116,9 +118,41 @@ El intercambio de mensajes producido en nuestro sistema consiste en la comunicac
 \section{INSTALACIÓN Y EJECUCIÓN}
 Como requisitos para poder ejecutar nuestro programa necesitaremos tener instaladas en nuestro computador las librerías de Jade y Jsoup. En el caso de instalar estas librerias en alguna distribución linux nos bastaría exportando en el CLASSPATH la ruta de los archivos .jar.
 
+\begin{listing}[style=consola, numbers=none]
+	$export CLASSPATH=$CLASSPATH:/home/alumno/jade/lib/jade.jar:/home/alumno/jade/classes
+	$export CLASSPATH=$CLASSPATH:/home/alumno/jade/PComparator/jsoup-1.10.3.jar
+	
+	
+	\end{listing} %$
+
+
+
 A la hora de la ejecución del programa, el orden en el que creamos los agentes es muy importante, ya que primero debemos inicializar el AgenteFinal y después ejecutar el agente Crawler.
 
 Cuando ejecutemos nuestro agente Crawler, le debemos pasar como argumento el producto que deseamos comparar en cada página, es recomendable no incluir la marca del producto, simplemente el modelo, ya que el programa podría mostrarnos un producto que no desearamos de la misma marca.
+
+Los primeros pasos para poder instalar nuestro programa serán los siguientes:
+\begin{enumerate}
+	\item Primero colocamos la carpeta "PcComparator" en la misma carpeta donde tenemos "Jade" instalado.
+	\item El siguiente paso será compilar los archivos de nuestro programa, para ello ejecutaremos el siguiente comando:
+\begin{listing}[style=consola, numbers=none]
+	~/jade$ javac -d classes PComparator/src/pccomparator/*.java
+	\end{listing} %$
+	
+	\item El paso final será iniciar jade e iniciar nuestros agentes, primero el agente final y después el crawler.
+	\begin{listing}[style=consola, numbers=none]
+		~/jade$ java jade.Boot -gui 
+		\end{listing} %$
+		
+	\item Finalmente después de iniciar los agentes este sería el resultado: 
+	
+	
+\includegraphics{Captura1}
+
+
+\includegraphics{Captura2}
+
+\end{enumerate}
 
 
 \end{document}

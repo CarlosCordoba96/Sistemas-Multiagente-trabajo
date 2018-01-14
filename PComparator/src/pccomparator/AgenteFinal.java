@@ -16,6 +16,7 @@ public class AgenteFinal extends Agent {
 		
 	}
 	public void TakeDown() {
+		System.out.println("Agente Finalizado.");
 		
 	}
 	
@@ -39,6 +40,10 @@ public class AgenteFinal extends Agent {
 				System.out.println("No hemos encontrado ningún producto con esas especificaciones");
 			}
 			
+		}
+		public int onEnd() {
+			doDelete();
+			return 0;
 		}
 	
 		
